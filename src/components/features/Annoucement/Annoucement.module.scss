@@ -1,0 +1,32 @@
+
+@import '../../../styles/settings.scss';
+
+.root {
+
+  .item {
+    margin-bottom: 10px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .link {
+    color: $text-white;
+    background-color: $main-color;
+    height: 40px;
+    text-decoration: none;
+  }
+
+  .link:hover {
+    color: $main-color;
+    background-color: $text-white;
+  }
+
+  .info {
+    font-size: 10px;
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
