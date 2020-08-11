@@ -1,15 +1,10 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { getAll, fetchPublished } from '../src/redux/postsRedux';
-
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
 import { Post } from './components/views/Post/Post';
