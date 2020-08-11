@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { editPost } from '../../../redux/postsRedux.js';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
@@ -12,9 +12,7 @@ import styles from './PostEdit.module.scss';
 
 const Component = ({posts, match, className, editPost}) => {
 
-  console.log('posts', posts);
   const editedPostId = match.params.id;
-  console.log(editedPostId);
   const editedPost = posts.data.find(item => item._id === editedPostId);
 
   const [post, updatePost] = React.useState({
@@ -23,6 +21,11 @@ const Component = ({posts, match, className, editPost}) => {
     email: '',
   });
 
+  const history = useHistory();
+
+  const backNavigate = () => {
+    history.push('/myposts');
+  };
 
   const handleChange = (e, name) => {
     updatePost({
@@ -34,6 +37,7 @@ const Component = ({posts, match, className, editPost}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editPost({...editedPost, ...post});
+    backNavigate();
   };
 
 

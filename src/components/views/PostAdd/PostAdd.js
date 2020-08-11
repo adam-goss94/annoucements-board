@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAll, addRequest } from '../../../redux/postsRedux.js';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
@@ -25,6 +25,12 @@ const Component = ({className, addRequestPost}) => {
     location: '',
   });
 
+  const history = useHistory();
+
+  const backNavigate = () => {
+    history.push('/');
+  };
+
   const handleChange = (e, name) => {
     newPost({
       ...post,
@@ -35,6 +41,7 @@ const Component = ({className, addRequestPost}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addRequestPost(post);
+    backNavigate();
   };
 
   return (
