@@ -1,4 +1,41 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .title {
+    font-style: oblique;
+    font-size: 45px;
+  }
+
+  .post {
+    margin-bottom: 20px;
+  }
+
+  .head {
+    display: flex;
+    justify-content: center;
+  }
+
+  .editButton {
+    margin: auto;
+  }
+
+  .link {
+    color: $text-white;
+    background-color: $main-color;
+    height: 40px;
+  }
+
+  .link:hover {
+    color: $main-color;
+    background-color: $text-white;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}

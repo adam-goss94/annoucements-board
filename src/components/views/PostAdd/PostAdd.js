@@ -2,36 +2,114 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
+import Button from '@material-ui/core/Button';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getAll, addRequest } from '../../../redux/postsRedux.js';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 import styles from './PostAdd.module.scss';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>PostAdd</h2>
-    {children}
-  </div>
-);
+const Component = ({className, addRequestPost}) => {
+
+  const [post, newPost] = React.useState({
+    author: '',
+    created: '',
+    updated: '',
+    status: '',
+    title: '',
+    text: '',
+    photo: '',
+    price: '',
+    phone: '',
+    location: '',
+  });
+
+  const handleChange = (e, name) => {
+    newPost({
+      ...post,
+      [name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addRequestPost(post);
+  };
+
+  return (
+    <ValidatorForm>
+      <div className={clsx(className, styles.root)}>
+        <div className={styles.head}>
+          <h1>Add new Annoucement</h1>
+        </div>
+        <form className={styles.form}
+          noValidate
+          autoComplete="off"
+          onSubmit={e => handleSubmit(e)}>
+          <div className={styles.row}>
+            <TextValidator
+              className={styles.input}
+              label="Title"
+              onChange={e => handleChange(e, 'title')}
+              value={post.title}
+              variant="outlined"
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+          </div>
+          <div className={styles.row}>
+            <TextValidator
+              className={styles.input}
+              label="Description"
+              onChange={e => handleChange(e, 'text')}
+              value={post.text}
+              variant="outlined"
+              multiline="true"
+              validators={['required']}
+              errorMessages={['this field is required']}
+            />
+          </div>
+          <div className={styles.row}>
+            <TextValidator
+              className={styles.input}
+              label="E-mail"
+              onChange={e => handleChange(e, 'author')}
+              name="author"
+              value={post.author}
+              variant="outlined"
+              validators={['required', 'isEmail']}
+              errorMessages={['this field is required', 'email is not valid']}
+            />
+          </div>
+          <Button
+            type="submit"
+            className={styles.link}
+          >Submit
+          </Button>
+        </form>
+      </div>
+    </ValidatorForm>
+  );
+};
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  addRequestPost: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  posts: getAll(state),
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  addRequestPost: post => dispatch(addRequest(post)),
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as PostAdd,
-  // Container as PostAdd,
+  Container as PostAdd,
   Component as PostAddComponent,
 };

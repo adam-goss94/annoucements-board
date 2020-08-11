@@ -8,10 +8,11 @@ import clsx from 'clsx';
 
 import styles from './NotFound.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({className}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>NotFound</h2>
-    {children}
+    <div className={styles.head}>
+      <h1 className={styles.title}>Please, go back to home page :)</h1>
+    </div>
   </div>
 );
 

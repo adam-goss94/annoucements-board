@@ -1,37 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import clsx from 'clsx';
+import {Annoucement} from '../../features/Annoucement/Annoucement';
+import Button from '@material-ui/core/Button';
+import {NavLink} from 'react-router-dom';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getAll } from '../../../redux/postsRedux';
 
 import styles from './Post.module.scss';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>Post</h2>
-    {children}
-  </div>
-);
+const Component = ({posts, match, userLogged}) => {
 
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
+  console.log('posts', posts);
+  const postId = match.params.id;
+  console.log(postId);
+  const post = posts.find(item => item._id === postId);
+
+  console.log('post', post);
+  return (
+    <div className={styles.root}>
+      <div className={styles.head}>
+        <h1 className={styles.title}>Annoucement details</h1>
+      </div>
+      <Annoucement
+        title={post.title}
+        text={post.text}
+        author={post.author}
+        id={post._id}
+        created={post.created}
+        updated={post.updated}
+        status={post.status}
+      />
+
+      { userLogged === true
+        ?
+        <div className={styles.editButton}>
+          <Button className={styles.link} component={NavLink} to={process.env.PUBLIC_URL + `/post/${post._id}/edit`} activeClassName='active'>Edit annoucement</Button>
+        </div>
+        :
+        ''
+      }
+
+    </div>
+  );
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+Component.propTypes = {
+  posts: PropTypes.array,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  userLogged: PropTypes.bool,
+};
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapStateToProps = state => ({
+  posts: getAll(state),
+  userLogged: state.userLogged,
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps)(Component);
 
 export {
-  Component as Post,
-  // Container as Post,
+  Container as Post,
   Component as PostComponent,
 };
