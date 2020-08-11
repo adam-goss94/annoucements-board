@@ -23,8 +23,12 @@ class Component extends React.Component {
           <Annoucements
             key={post._id}
             title={post.title}
+            text={post.text}
             author={post.author}
             id={post._id}
+            created={post.created}
+            updated={post.updated}
+            status={post.status}
           />
         ))}
       </div>

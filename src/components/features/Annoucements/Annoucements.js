@@ -19,10 +19,6 @@ const Component = ({id, title, text, author}) => (
           >
             {title}
           </Typography>
-          <Typography
-            paragraph = {true}>
-            {text}
-          </Typography>
           <div className={styles.footer}>
             <Typography>{author}</Typography>
           </div>
@@ -37,7 +33,7 @@ Component.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
   author: PropTypes.string,
-  userLogged: PropTypes.bool,
+  created: PropTypes.string,
 };
 
 export {
