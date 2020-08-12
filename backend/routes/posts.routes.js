@@ -17,7 +17,6 @@ router.get('/posts', async (req, res) => {
 
 router.post('/posts', async (req, res) => {
   try {
-    console.log('saving:', req.body);
     const post = new Post({...req.body, status: 'published' });
     const result = await post.save();
 
