@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Annoucement} from '../Annoucement/Annoucement';
+import {Annoucements} from '../Annoucements/Annoucements';
 import { connect } from 'react-redux';
 import { getPostsByAuthor, fetchPublished } from '../../../redux/postsRedux';
 
@@ -20,7 +20,7 @@ class Component extends React.Component {
     return (
       <div className={styles.root}>
         {posts.map(post =>(
-          <Annoucement
+          <Annoucements
             key={post._id}
             title={post.title}
             text={post.text}

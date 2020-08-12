@@ -27,7 +27,7 @@ const Component = ({id, title, text, author, created, updated, status}) => (
             <Typography>{author}</Typography>
           </div>
           <Typography className={styles.info}>published: {created}</Typography>
-          <Typography className={styles.info}>last edit: {updated}</Typography>
+          <Typography className={styles.info}>edit: {updated}</Typography>
           <Typography className={styles.info}>status: {status}</Typography>
 
         </CardContent>

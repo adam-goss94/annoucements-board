@@ -2,6 +2,9 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  min-width: 300px;
+  flex: 1;
+  margin-right: 20px;
 
   .item {
     margin-bottom: 10px;

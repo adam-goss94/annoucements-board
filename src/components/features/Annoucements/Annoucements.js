@@ -13,8 +13,8 @@ const Component = ({id, title, text, author}) => (
       <Card  className={styles.item}>
         <CardContent>
           <Typography
-            variant="h4"
-            color="primary"
+            variant="h5"
+            color="textPrimary"
             paragraph = {true}
           >
             {title}
